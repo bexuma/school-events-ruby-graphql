@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_043403) do
+ActiveRecord::Schema.define(version: 2018_07_30_053937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2018_07_30_043403) do
     t.index ["event_id"], name: "index_prices_on_event_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "user_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_reviews_on_event_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -44,4 +54,6 @@ ActiveRecord::Schema.define(version: 2018_07_30_043403) do
 
   add_foreign_key "events", "users"
   add_foreign_key "prices", "events"
+  add_foreign_key "reviews", "events"
+  add_foreign_key "reviews", "users"
 end
