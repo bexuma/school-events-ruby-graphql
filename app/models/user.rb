@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   before_save { email.downcase! }
 
+  has_many :hosted_events, class_name: "Event"
+
   has_secure_password
 
   validates :email,
