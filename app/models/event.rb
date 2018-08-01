@@ -6,6 +6,6 @@ class Event < ApplicationRecord
                 :reject_if => proc { |attrs| attrs['label'].blank? || attrs['amount'].blank? }
   belongs_to :user
 
-  validates_presence_of :title, :starts_at, :ends_at
+  validates_presence_of :title, :description
 
 end
