@@ -2,6 +2,7 @@ class Resolvers::CreateEvent < GraphQL::Function
 
   argument :title, !types.String
   argument :description, !types.String
+  argument :image_name, !types.String
   argument :site_url, !types.String
   argument :starts_at, !Types::DateTimeType
   argument :ends_at, !Types::DateTimeType
@@ -17,6 +18,7 @@ class Resolvers::CreateEvent < GraphQL::Function
     event = Event.create!(
       title: args[:title],
       description: args[:description],
+      image_name: args[:image_name],
       site_url: args[:site_url],
       starts_at: args[:starts_at],
       ends_at: args[:ends_at],

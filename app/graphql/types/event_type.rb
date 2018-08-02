@@ -5,6 +5,7 @@ Types::EventType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :title, !types.String
   field :description, !types.String
+  field :image_name, !types.String
   field :site_url, !types.String
   field :starts_at, !Types::DateTimeType
   field :ends_at, !Types::DateTimeType
