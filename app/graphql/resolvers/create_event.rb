@@ -4,7 +4,7 @@ class Resolvers::CreateEvent < GraphQL::Function
   argument :description, !types.String
   argument :site_url, !types.String
   argument :starts_at, !Types::DateTimeType
-  rgument :ends_at, !Types::DateTimeType
+  argument :ends_at, !Types::DateTimeType
   argument :prices, types[Inputs::PriceInput]
 
   type Types::EventType
