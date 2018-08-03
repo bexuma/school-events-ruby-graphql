@@ -9,6 +9,10 @@ class Event < ApplicationRecord
   has_many :participations
   has_many :participating_users, :through => :participations, :source => "user"
 
+  def numberOfParticipants
+    participating_users.count
+  end
+
   validates_presence_of :title, :description, :image_name
 
 end
