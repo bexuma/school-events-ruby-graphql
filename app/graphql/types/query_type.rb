@@ -19,4 +19,11 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve ->(obj, _args, _ctx) { Event.all }
   end
 
+  field :event, !Types::EventType do
+    argument :eventId, types.ID
+    resolve ->(obj, args, _ctx) { 
+      Event.find(args[:eventId])
+    }
+  end
+
 end

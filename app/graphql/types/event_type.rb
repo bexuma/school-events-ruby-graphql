@@ -11,6 +11,7 @@ Types::EventType = GraphQL::ObjectType.define do
   field :ends_at, !Types::DateTimeType
   field :prices, -> { !types[Types::PriceType] }
   field :hostedBy, -> { Types::UserType }, property: :user
+  field :numberOfParticipants, !types.Int
 
   field :reviews, -> { !types[Types::ReviewType] }
 end
