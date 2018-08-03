@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :hosted_events, class_name: "Event", dependent: :destroy
 
+  has_many :participations
+  has_many :participating_events, :through => :participations, :source => "event"
+
   has_secure_password
 
   validates :email,

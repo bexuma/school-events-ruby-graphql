@@ -4,4 +4,6 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :createUser, function: Resolvers::CreateUser.new
   field :signInUser, function: Resolvers::SignInUser.new
   field :createEvent, function: Resolvers::CreateEvent.new
+  field :createParticipation, function: Resolvers::CreateParticipation.new
+  
 end
