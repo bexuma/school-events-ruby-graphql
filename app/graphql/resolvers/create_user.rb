@@ -8,6 +8,7 @@ class Resolvers::CreateUser < GraphQL::Function
   argument :name, !types.String
   argument :username, !types.String
   argument :authProvider, !AuthProviderInput
+  argument :avatar, !types.String
 
   type do
     name 'SignUpPayload'
@@ -21,7 +22,8 @@ class Resolvers::CreateUser < GraphQL::Function
       name: args[:name],
       username: args[:username],
       email: args[:authProvider][:email][:email],
-      password: args[:authProvider][:email][:password]
+      password: args[:authProvider][:email][:password],
+      avatar: args[:avatar],
     )
 
     OpenStruct.new({
