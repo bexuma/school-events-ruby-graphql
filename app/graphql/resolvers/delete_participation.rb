@@ -9,7 +9,7 @@ class Resolvers::DeleteParticipation < GraphQL::Function
       raise GraphQL::ExecutionError.new("Authentication required")
     end
 
-    ctx[:current_user].participating_events.find_by_id(args[:eventId]).destroy
+    Participation.find_by(user: ctx[:current_user], event_id: args[:eventId]).destroy
     
     rescue ActiveRecord::RecordInvalid => e
       # this would catch all validation errors and translate them to GraphQL::ExecutionError

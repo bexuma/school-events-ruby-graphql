@@ -6,7 +6,7 @@ class Event < ApplicationRecord
                 :reject_if => proc { |attrs| attrs['amount'].blank? } #|attrs| attrs['label'].blank? || 
   belongs_to :user
 
-  has_many :participations, dependent: :destroy
+  has_many :participations
   has_many :participating_users, :through => :participations, :source => "user"
 
   def numberOfParticipants
