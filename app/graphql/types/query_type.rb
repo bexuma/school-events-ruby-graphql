@@ -26,4 +26,36 @@ Types::QueryType = GraphQL::ObjectType.define do
     }
   end
 
+  field :userParticipatingEvents, !types[Types::EventType] do
+    resolve ->(obj, args, ctx) {
+      if ctx[:current_user].blank?
+        raise GraphQL::ExecutionError.new("Authentication required")
+      end
+
+      ctx[:current_user].participating_events
+    }
+  end
+
+  field :userHostedEvents, !types[Types::EventType] do
+    resolve ->(obj, args, ctx) {
+      if ctx[:current_user].blank?
+        raise GraphQL::ExecutionError.new("Authentication required")
+      end
+
+      ctx[:current_user].hosted_events
+    }
+  end
+
+  field :userIsParticipating, !types.Boolean do
+    argument :eventId, types.ID
+
+    resolve ->(obj, args, ctx) { 
+      if ctx[:current_user].blank?
+        raise GraphQL::ExecutionError.new("Authentication required")
+      end
+
+      ctx[:current_user].participating_events.pluck(:id).include? args[:eventId].to_i
+    }
+  end
+
 end

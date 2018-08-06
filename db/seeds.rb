@@ -8,8 +8,10 @@
 
 User.destroy_all
 Event.destroy_all
+Review.destroy_all
+Participation.destroy_all
 
-User.create!(
+user = User.create!(
   name: "NURBANK",
   email: "cc@nurbank.kz",
   username: "nurbank",
@@ -22,7 +24,8 @@ Event.create!(
   site_url: "http://nurrun.kz/",
   starts_at: DateTime.new(2018,8,4,7),
   ends_at: DateTime.new(2018,8,4,12,30),
-  user_id: User.first.id,
+  user: user,
+  image_name: "234431124",
   description: %Q{
     Забег проводится с целью:
     — благотворительности и привлечения внимания к проблеме онкологических заболеваний
@@ -55,7 +58,7 @@ Event.create!(
   ]
 )
 
-User.create!(
+user = User.create!(
   name: "Арт-убежище Bunker",
   email: "info@bunker.kz",
   username: "bunkerkz",
@@ -65,10 +68,11 @@ User.create!(
 
 Event.create!(
   title: "Поэтический вечер «Строки»",
-  site_url: "http://nurrun.kz/",
+  site_url: "ticketon.kz",
   starts_at: DateTime.new(2018,8,4,19),
   ends_at: DateTime.new(2018,8,4,22),
-  user_id: User.last.id,
+  user: user,
+  image_name: "234431124",
   description: %Q{
     Если вы устали от шумных тусовок, если вас привлекают творческие люди, интеллектуальные беседы, если вы неравнодушны к литературному искусству, то добро пожаловать! Авторские произведения, известные и не очень стихи, образные постановки от поэтов, перформансы от артистов театра и, конечно, новые знакомства.
   },
