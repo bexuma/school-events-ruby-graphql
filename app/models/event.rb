@@ -9,8 +9,8 @@ class Event < ApplicationRecord
   has_many :participations
   has_many :participating_users, :through => :participations, :source => "user"
 
-  def numberOfParticipants
-    participating_users.count
+  def participantIds
+    participating_users.pluck(:id)
   end
 
   validates_presence_of :title, :description, :image_name
