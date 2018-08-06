@@ -21,15 +21,19 @@ class Resolvers::CreateUser < GraphQL::Function
     user = User.create!(
       name: args[:name],
       username: args[:username],
-      email: args[:authProvider][:email][:email],
-      password: args[:authProvider][:email][:password],
       avatar: args[:avatar],
+      email: args[:authProvider][:email][:email],
+      password: args[:authProvider][:email][:password] 
     )
 
     OpenStruct.new({
       token: AuthToken.token(user),
       user: user
     })
+
+    rescue ActiveRecord::RecordInvalid => e
+      # this would catch all validation errors and translate them to GraphQL::ExecutionError
+      GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
 
   end
 end

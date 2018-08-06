@@ -24,4 +24,11 @@ class User < ApplicationRecord
   validates :name,
           presence: true,
           length: { maximum: 78 }
+
+  validates :avatar,
+          presence: true
+
+  validates :username,
+          presence: true
+
 end
