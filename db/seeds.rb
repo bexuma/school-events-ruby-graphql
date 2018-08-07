@@ -7,16 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
-Event.destroy_all
-Review.destroy_all
-Participation.destroy_all
 
 user = User.create!(
   name: "NURBANK",
   email: "cc@nurbank.kz",
   username: "nurbank",
   password: "secret",
-  password_confirmation: "secret"
+  password_confirmation: "secret",
+  avatar: "1234567890"
 )
 
 Event.create!(
@@ -63,7 +61,8 @@ user = User.create!(
   email: "info@bunker.kz",
   username: "bunkerkz",
   password: "secret",
-  password_confirmation: "secret"
+  password_confirmation: "secret",
+  avatar: "0987654321"
 )
 
 Event.create!(

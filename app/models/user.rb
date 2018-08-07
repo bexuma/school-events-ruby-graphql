@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :participations, dependent: :destroy
   has_many :participating_events, :through => :participations, :source => "event"
+  has_many :reviews, dependent: :destroy
 
   has_secure_password
 
