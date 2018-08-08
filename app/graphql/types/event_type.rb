@@ -7,6 +7,9 @@ Types::EventType = GraphQL::ObjectType.define do
   field :description, !types.String
   field :image_name, !types.String
   field :site_url, !types.String
+  field :address, !types.String
+  field :latitude, types.Float
+  field :longitude, types.Float
   field :starts_at, !Types::DateTimeType
   field :ends_at, !Types::DateTimeType
   field :prices, -> { !types[Types::PriceType] }
