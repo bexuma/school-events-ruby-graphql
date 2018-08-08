@@ -10,8 +10,7 @@ class Event < ApplicationRecord
   has_many :participating_users, :through => :participations, :source => "user"
 
   geocoded_by :address
-  # after_validation :geocode, :if => :address_changed?
-  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
+  after_validation :geocode, :if => :address_changed?
 
   def participantIds
     participating_users.pluck(:id)

@@ -7,6 +7,7 @@ class Resolvers::CreateEvent < GraphQL::Function
   argument :starts_at, !Types::DateTimeType
   argument :ends_at, !Types::DateTimeType
   argument :prices, types[Inputs::PriceInput]
+  argument :address, !types.String
 
   type Types::EventType
 
@@ -22,7 +23,8 @@ class Resolvers::CreateEvent < GraphQL::Function
       site_url: args[:site_url],
       starts_at: args[:starts_at],
       ends_at: args[:ends_at],
-      user: ctx[:current_user]
+      user: ctx[:current_user],
+      address: args[:address]
     )
 
     if args[:prices]
