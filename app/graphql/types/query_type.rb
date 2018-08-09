@@ -16,7 +16,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   end
 
   field :allEvents, !types[Types::EventType] do
-    resolve ->(obj, _args, _ctx) { Event.all }
+    resolve ->(obj, _args, _ctx) { Event.order("id DESC") }
   end
 
   field :event, !Types::EventType do
