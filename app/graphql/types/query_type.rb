@@ -19,6 +19,13 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve ->(obj, _args, _ctx) { Event.order("id DESC") }
   end
 
+  field :findUser,  !Types::UserType do
+    argument :userId, types.ID
+    resolve ->(obj, args, _ctx) { 
+      User.find(args[:userId])
+    }
+  end
+
   field :event, !Types::EventType do
     argument :eventId, types.ID
     resolve ->(obj, args, _ctx) { 
@@ -32,7 +39,7 @@ Types::QueryType = GraphQL::ObjectType.define do
         raise GraphQL::ExecutionError.new("Authentication required")
       end
 
-      ctx[:current_user].participating_events
+      ctx[:current_user].participatingEvents
     }
   end
 
@@ -54,7 +61,7 @@ Types::QueryType = GraphQL::ObjectType.define do
         raise GraphQL::ExecutionError.new("Authentication required")
       end
 
-      ctx[:current_user].participating_events.pluck(:id).include? args[:eventId].to_i
+      ctx[:current_user].participatingEvents.pluck(:id).include? args[:eventId].to_i
     }
   end
 
