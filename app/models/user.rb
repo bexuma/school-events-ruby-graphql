@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :hosted_events, class_name: "Event", dependent: :destroy
 
   has_many :participations, dependent: :destroy
-  has_many :participating_events, :through => :participations, :source => "event"
+  has_many :participatingEvents, :through => :participations, :source => "event"
   has_many :reviews, dependent: :destroy
 
   has_secure_password
