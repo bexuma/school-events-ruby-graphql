@@ -16,4 +16,6 @@ Types::EventType = GraphQL::ObjectType.define do
   field :hostedBy, -> { Types::UserType }, property: :user
   field :participantIds, types[types.Int]
   field :reviews, -> { !types[Types::ReviewType] }
+  field :tags, -> { !types[Types::TagType] }
+
 end
