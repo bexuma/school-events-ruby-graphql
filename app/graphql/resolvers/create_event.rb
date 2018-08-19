@@ -39,9 +39,14 @@ class Resolvers::CreateEvent < GraphQL::Function
 
     if args[:tags]
       args[:tags].each do |tag|
-        event.tags.create!(
-          name: tag.name,
-        )
+        t = Tag.new(name: tag.name)
+        if t.valid?
+          t.save!
+          event.tags.append(t)
+        else
+          existing_tag = Tag.find_by_name(tag.name.downcase)
+          event.tags.append(existing_tag)
+        end
       end
     end
 
