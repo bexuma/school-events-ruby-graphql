@@ -1,8 +1,9 @@
 class Tag < ApplicationRecord
+  has_many :taggings
   has_many :events, through: :taggings
 
   before_save { name.downcase! }
 
-  validates_presence_of :name
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
 end
