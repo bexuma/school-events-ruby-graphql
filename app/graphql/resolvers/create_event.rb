@@ -7,6 +7,7 @@ class Resolvers::CreateEvent < GraphQL::Function
   argument :starts_at, !Types::DateTimeType
   argument :ends_at, !Types::DateTimeType
   argument :prices, types[Inputs::PriceInput]
+  argument :tags, types[Inputs::TagInput]
   argument :address, !types.String
 
   type Types::EventType
@@ -32,6 +33,14 @@ class Resolvers::CreateEvent < GraphQL::Function
         event.prices.create!(
           label: price.label,
           amount: price.amount
+        )
+      end
+    end
+
+    if args[:tags]
+      args[:tags].each do |tag|
+        event.tags.create!(
+          name: tag.name,
         )
       end
     end
