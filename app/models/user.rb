@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :participatingEvents, :through => :participations, :source => "event"
   has_many :reviews, dependent: :destroy
 
+  has_many :user_taggings
+  has_many :tags, through: :user_taggings
+
   has_secure_password
 
   validates :email,
