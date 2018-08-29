@@ -53,6 +53,18 @@ Types::QueryType = GraphQL::ObjectType.define do
     }
   end
 
+  field :eventsOfTag, !types[Types::EventType] do
+    argument :tagId, types.ID
+
+    resolve ->(obj, args, ctx) {
+      if ctx[:current_user].blank?
+        raise GraphQL::ExecutionError.new("Authentication required")
+      end
+
+      Tag.find(args[:tagId]).events
+    }
+  end
+
   field :userIsParticipating, !types.Boolean do
     argument :eventId, types.ID
 
