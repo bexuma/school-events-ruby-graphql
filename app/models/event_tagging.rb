@@ -1,4 +1,4 @@
-class Tagging < ApplicationRecord
+class EventTagging < ApplicationRecord
   belongs_to :event
   belongs_to :tag
 end

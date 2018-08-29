@@ -15,6 +15,16 @@ ActiveRecord::Schema.define(version: 2018_08_19_174539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "event_taggings", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "tag_id"], name: "index_event_taggings_on_event_id_and_tag_id", unique: true
+    t.index ["event_id"], name: "index_event_taggings_on_event_id"
+    t.index ["tag_id"], name: "index_event_taggings_on_tag_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -58,16 +68,6 @@ ActiveRecord::Schema.define(version: 2018_08_19_174539) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "taggings", force: :cascade do |t|
-    t.bigint "event_id"
-    t.bigint "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id", "tag_id"], name: "index_taggings_on_event_id_and_tag_id", unique: true
-    t.index ["event_id"], name: "index_taggings_on_event_id"
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -86,12 +86,12 @@ ActiveRecord::Schema.define(version: 2018_08_19_174539) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "event_taggings", "events"
+  add_foreign_key "event_taggings", "tags"
   add_foreign_key "events", "users"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
   add_foreign_key "prices", "events"
   add_foreign_key "reviews", "events"
   add_foreign_key "reviews", "users"
-  add_foreign_key "taggings", "events"
-  add_foreign_key "taggings", "tags"
 end

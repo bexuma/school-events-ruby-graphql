@@ -1,6 +1,6 @@
 class Tag < ApplicationRecord
-  has_many :taggings
-  has_many :events, through: :taggings
+  has_many :event_taggings
+  has_many :events, through: :event_taggings
 
   before_save { name.downcase! }
 
