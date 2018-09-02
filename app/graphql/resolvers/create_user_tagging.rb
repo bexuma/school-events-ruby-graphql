@@ -1,15 +1,15 @@
-class Resolvers::CreateParticipation < GraphQL::Function
-  argument :eventId, !types.ID
+class Resolvers::CreateUserTagging < GraphQL::Function
+  argument :tagId, !types.ID
 
-  type Types::ParticipationType
+  type Types::UserTaggingType
 
   def call(obj, args, ctx)
     if ctx[:current_user].blank?
       raise GraphQL::ExecutionError.new("Authentication required")
     end
 
-    Participation.create!(
-      event_id: args[:eventId],
+    UserTagging.create!(
+      tag_id: args[:tagId],
       user: ctx[:current_user]
     )
     
