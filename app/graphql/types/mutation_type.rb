@@ -9,4 +9,7 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :createParticipation, function: Resolvers::CreateParticipation.new
   field :deleteParticipation, function: Resolvers::DeleteParticipation.new
 
+  field :createUserTagging, function: Resolvers::CreateUserTagging.new
+  field :deleteUserTagging, function: Resolvers::DeleteUserTagging.new
+
 end

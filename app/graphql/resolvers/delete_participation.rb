@@ -1,5 +1,4 @@
 class Resolvers::DeleteParticipation < GraphQL::Function
-
   argument :eventId, !types.ID
 
   type Types::ParticipationType
@@ -16,7 +15,4 @@ class Resolvers::DeleteParticipation < GraphQL::Function
       GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
 
   end
-
-  
-
 end
