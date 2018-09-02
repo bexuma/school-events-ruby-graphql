@@ -13,6 +13,10 @@ class User < ApplicationRecord
   has_many :user_taggings
   has_many :tags, through: :user_taggings
 
+  def followingTags
+    tags.pluck(:id)
+  end
+
   has_secure_password
 
   validates :email,
